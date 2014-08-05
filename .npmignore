@@ -1,0 +1,5 @@
+.git*
+try
+.idea
+cache
+.DS_Store
