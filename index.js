@@ -30,6 +30,19 @@ module.exports = function(options){
   });
 
   // return the logger
+  bunyan.stdSerializers.req = function req(req) {
+    if (!req || !req.connection)
+      return req;
+    return {
+      method: req.method,
+      url: req.originalUrl || req.url, // in express req.url is changed
+      headers: req.headers,
+      remoteAddress: req.connection.remoteAddress,
+      remotePort: req.connection.remotePort
+    };
+  };
+
+
   logger = bunyan.createLogger({
     name : options.name || 'express app',
     streams: streams,
