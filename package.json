@@ -13,7 +13,7 @@
   "author": "Ben P.P. Tung",
   "license": "MIT",
   "dependencies": {
-    "bunyan": "1.0.0",
+    "bunyan": "^1.0.0",
     "mkdirp": "^0.5.0",
     "node-uuid": "^1.4.1",
     "node.extend": "^1.0.10"
