@@ -14,7 +14,7 @@ module.exports = function(options){
     streams.push({
       path: options.path,
       type: 'file',
-      level: options.level && bunyan[options.level.toUpperCase()] || bunyan.TRACE
+      level: options.level && bunyan[options.level.toUpperCase()] || bunyan.INFO
     });
 
     mkdirp.sync(path.dirname(options.path));
@@ -24,14 +24,14 @@ module.exports = function(options){
   if (options.stream) streams.push({
     stream: options.stream,
     type: 'stream',
-    level: options.level && bunyan[options.level.toUpperCase()] || bunyan.TRACE
+    level: options.level && bunyan[options.level.toUpperCase()] || bunyan.INFO
   });
 
   // default to process.stdout stream, if no stream
   if (streams.length == 0) streams.push({
     stream: process.stdout,
     type: 'stream',
-    level: options.level && bunyan[options.level.toUpperCase()] || bunyan.TRACE
+    level: options.level && bunyan[options.level.toUpperCase()] || bunyan.INFO
   });
 
   // bind req serializer
