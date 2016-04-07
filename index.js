@@ -3,6 +3,7 @@ const bunyan = require('bunyan');
 const uuid = require('node-uuid');
 const merge = require('utils-merge');
 const mkdirp = require('mkdirp');
+const errserial = require('./lib/error-serializer');
 
 module.exports = function(options){
 
@@ -54,6 +55,7 @@ module.exports = function(options){
     name : options.name || 'express app',
     streams: streams,
     serializers:merge(bunyan.stdSerializers, {
+      err: errserial,
       clietReq: client_req,
       clietRes: client_res
     })

@@ -1,6 +1,6 @@
 {
   "name": "bunlogger",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "bunyan logger middleware for express/connect",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "bunyan": "^1.0.0",
     "mkdirp": "^0.5.0",
     "node-uuid": "^1.4.1",
+    "util-superagent-serializer": "^1.0.0",
     "utils-merge": "^1.0.0"
   },
   "devDependencies": {

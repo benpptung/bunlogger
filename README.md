@@ -18,37 +18,36 @@ Features
 
 Usage
 ==========
+
+###app.js
 ```
-var pkg = require('../package.json'),
-    bunlog = require('bunlogger'),
-    express = require('express'),
-    path = require('path');
-    
+const express = require('express');
+const config = require('config');
+const Bunlog = require('bunlogger');
+
+   
 // set up app
 //===============
-var app = express(),
-    logger = app.logger = app.get('env') === 'production' ?
-        bunlog({name: pkg.name, path : path.resolve(__dirname, 'log', pkg.name)}) :
-        bunlog({name: pkg.name});
-        // logging to a file in production environment or logging to process.stdout 
+var app = express();
+var logger = Bunlog(config.bunlog);
 
 // as a middleware
 app.use(logger.connect());
 
 // as an error middleware
 app.use(logger.error());
+```
 
-.....
-// Example : logging in a request
-function(req, res){
-	auth.authenticate(req.body.username, req.body.password, function(err, user){
-		if(err || !user){
-			req.log.warn(err, 'login error %s', err);
-			...
-			return res.redirect('/login');
-		}
-		
-		....
-	}
-}
+###config/index.js
+```
+const join = require('path').join;
+const pkgname = require('../package.json').name;
+const production = process.env.NODE_ENV == 'production';
+
+
+  // logging config
+var bunlog = {name: pkgname};
+if (production) bunlog.path = join(__dirname, '..', 'logs', pkgname + '.log');
+
+exports.bunlog = bunlog;
 ```
