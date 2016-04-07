@@ -1,35 +1,40 @@
-var path = require('path'),
-    bunyan = require('bunyan'),
-    uuid = require('node-uuid'),
-    extend = require('node.extend'),
-    mkdirp = require('mkdirp');
+const path = require('path');
+const bunyan = require('bunyan');
+const uuid = require('node-uuid');
+const merge = require('utils-merge');
+const mkdirp = require('mkdirp');
 
 module.exports = function(options){
 
   options = options || {};
-  var streams = options.streams || [],
-      logger;
+  var streams = Array.isArray(options.streams) ? options.streams : [];
 
+  // if options.path, convert `path` into bunyan path stream
   if (options.path) {
     streams.push({
       path: options.path,
       type: 'file',
       level: options.level && bunyan[options.level.toUpperCase()] || bunyan.TRACE
     });
+
     mkdirp.sync(path.dirname(options.path));
   }
+
+  // accept writable stream
   if (options.stream) streams.push({
     stream: options.stream,
     type: 'stream',
     level: options.level && bunyan[options.level.toUpperCase()] || bunyan.TRACE
   });
+
+  // default to process.stdout stream, if no stream
   if (streams.length == 0) streams.push({
     stream: process.stdout,
     type: 'stream',
     level: options.level && bunyan[options.level.toUpperCase()] || bunyan.TRACE
   });
 
-  // return the logger
+  // bind req serializer
   bunyan.stdSerializers.req = function req(req) {
     if (!req || !req.connection)
       return req;
@@ -42,11 +47,13 @@ module.exports = function(options){
     };
   };
 
+  // create logger
+  var logger;
 
   logger = bunyan.createLogger({
     name : options.name || 'express app',
     streams: streams,
-    serializers:extend(bunyan.stdSerializers, {
+    serializers:merge(bunyan.stdSerializers, {
       clietReq: client_req,
       clietRes: client_res
     })
@@ -78,7 +85,7 @@ module.exports = function(options){
       req.log.warn(err, 'error log: %s', err);
       next(err);
     };
-  }
+  };
 
   return logger;
 };
