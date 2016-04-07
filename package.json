@@ -16,7 +16,7 @@
     "bunyan": "^1.0.0",
     "mkdirp": "^0.5.0",
     "node-uuid": "^1.4.1",
-    "node.extend": "^1.0.10"
+    "utils-merge": "^1.0.0"
   },
   "devDependencies": {
     "express": "^4.4.4",
