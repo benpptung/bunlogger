@@ -1,6 +1,6 @@
 const path = require('path');
 const bunyan = require('bunyan');
-const uuid = require('node-uuid');
+const uuid = require('uuid');
 const merge = require('utils-merge');
 const mkdirp = require('mkdirp');
 const errserial = require('./lib/error-serializer');
