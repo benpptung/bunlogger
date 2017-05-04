@@ -77,8 +77,8 @@ $ DEBUG=* node bin/www | bunyan
 
  - name:     {String},
  - logDir:   'path/to/log/directory'  - directory to save log files
- - keep:     {Number}                 - how many log files keep
- - maxsize:  {Number}                 - max filesize allowed
+ - keep:     {Number}                 - how many log files keep. See [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream)
+ - maxsize:  {Number}                 - max filesize allowed. See [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream)
  - dev:      {Boolean}                - Enable `process.stdout` for development
  - streams:  {Array}                  - additional streams for Bunyan
  
