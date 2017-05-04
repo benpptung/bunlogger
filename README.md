@@ -1,7 +1,7 @@
 bunlogger
 =========
 
-express middleware powered by bunyan
+logging utilities built on Bunyan and RotateLog-Stream
 
 Installation
 =====
@@ -16,41 +16,50 @@ Features
 3. `elapsed` show the time spent in this `req`.
 
 
-Usage
+Quick Start
 ==========
 
-###app.js
+### express
 ```
 const express = require('express');
-const config = require('config');
 const Bunlog = require('bunlogger');
 
    
-// set up app
-//===============
 var app = express();
-var logger = Bunlog(config.bunlog);
+var logger = new Bunlog();
 
 // as a middleware
 app.use(logger.connect());
 
-// as an error middleware
+// as an error handler
 app.use(logger.error());
 ```
 
-###config/index.js
+### EventEmitter
 ```
-const join = require('path').join;
-const pkgname = require('../package.json').name;
-const production = process.env.NODE_ENV == 'production';
+const Logger = require('bunlogger').Logger;
 
+var log = new Logger();
 
-  // logging config
-var bunlog = {name: pkgname};
-if (production) bunlog.path = join(__dirname, '..', 'logs', pkgname + '.log');
+log.info('hi');
+log.warn('hi');
+log.error('hi');
 
-exports.bunlog = bunlog;
 ```
+
+### Print Error
+
+```
+const print = require('bunlogger').printErr;
+
+try {
+  new NotExist();
+} catch (er) {
+  print(er)
+}
+
+```
+
 
 ###cli
 bunlogger is based on bunyan, so you can start your server like following in development.

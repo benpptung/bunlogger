@@ -1,28 +1,23 @@
 {
   "name": "bunlogger",
-  "version": "1.0.3",
-  "description": "bunyan logger middleware for express/connect",
-  "main": "index.js",
-  "scripts": {
-    "test": "make test"
-  },
+  "version": "2.0.0",
+  "description": "General logger for all my projects, a better version than mint-robot/util-logger",
+  "author": "Ben P.P. Tung",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/benpptung/bunlogger.git"
   },
-  "author": "Ben P.P. Tung",
-  "license": "MIT",
-  "dependencies": {
-    "bunyan": "^1.0.0",
-    "mkdirp": "^0.5.0",
-    "node-uuid": "^1.4.1",
-    "util-superagent-serializer": "^1.0.0",
-    "utils-merge": "^1.0.0"
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
   },
-  "devDependencies": {
-    "express": "^4.4.4",
-    "mocha": "^1.20.1",
-    "should": "^4.0.4",
-    "supertest": "^0.13.0"
+  "dependencies": {
+    "bunyan": "^1.8.10",
+    "colors": "^1.1.2",
+    "mkdirp": "^0.5.1",
+    "node-uuid": "^1.4.8",
+    "rotatelog-stream": "^1.0.2",
+    "util-superagent-serializer": "^1.0.1"
   }
 }
