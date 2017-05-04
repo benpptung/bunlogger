@@ -67,7 +67,7 @@ try {
 ```
 
 
-###cli
+### cli
 
 make sure bunyan is installed globally
 
