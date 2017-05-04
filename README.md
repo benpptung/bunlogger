@@ -66,9 +66,21 @@ try {
 
 
 ###cli
-bunlogger is based on bunyan, so you can start your server like following in development.
+
+make sure bunyan is installed globally
 
 ```
 $ DEBUG=* node bin/www | bunyan
 ```
-make sure bunyan is installed globally
+
+# Options
+
+ - name:     {String},
+ - logDir:   'path/to/log/directory'  - directory to save log files
+ - keep:     {Number}                 - how many log files keep
+ - maxsize:  {Number}                 - max filesize allowed
+ - dev:      {Boolean}                - Enable `process.stdout` for development
+ - streams:  {Array}                  - additional streams for Bunyan
+ 
+
+
