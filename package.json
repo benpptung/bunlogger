@@ -1,7 +1,7 @@
 {
   "name": "bunlogger",
-  "version": "2.0.0",
-  "description": "General logger for all my projects, a better version than mint-robot/util-logger",
+  "version": "2.0.1",
+  "description": "bunyan logger, bunyan express middleware, pretty print err for development",
   "author": "Ben P.P. Tung",
   "license": "MIT",
   "repository": {
