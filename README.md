@@ -51,3 +51,11 @@ if (production) bunlog.path = join(__dirname, '..', 'logs', pkgname + '.log');
 
 exports.bunlog = bunlog;
 ```
+
+###cli
+bunlogger is based on bunyan, so you can start your server like following in development.
+
+```
+$ DEBUG=* node bin/www | bunyan
+```
+make sure bunyan is installed globally
