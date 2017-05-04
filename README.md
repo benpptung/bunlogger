@@ -35,15 +35,19 @@ app.use(logger.connect());
 app.use(logger.error());
 ```
 
-### EventEmitter
+### Create logger
+
+logger is using [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream) for rotating logs. 
+
 ```
-const Logger = require('bunlogger').Logger;
+const Logger = require('..').Logger;
+const join = require('path').join;
 
-var log = new Logger();
+var log = new Logger({logDir: join(__dirname, 'log')});
 
-log.info('hi');
-log.warn('hi');
-log.error('hi');
+log.info('hi info');
+log.warn('hi warn');
+log.error('hi error');
 
 ```
 
