@@ -12,9 +12,17 @@
   "scripts": {
     "test": "mocha test"
   },
-  "keywords": ["express", "bunyan", "logger", "middleware", "rotatelog"],
+  "keywords": [
+    "express",
+    "bunyan",
+    "logger",
+    "middleware",
+    "rotatelog"
+  ],
   "dependencies": {
     "bunyan": "^1.8.10",
+    "bunyan-debug-stream": "^1.0.8",
+    "bunyan-prettystream": "^0.1.3",
     "colors": "^1.1.2",
     "mkdirp": "^0.5.1",
     "node-uuid": "^1.4.8",
