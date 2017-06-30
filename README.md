@@ -34,7 +34,7 @@ var logger = new Bunlog();
 app.use(logger.connect());
 
 // as an error handler
-app.use(logger.error());
+app.use(logger.onError());
 ```
 
 ### Create logger

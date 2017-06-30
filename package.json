@@ -1,6 +1,6 @@
 {
   "name": "bunlogger",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "bunyan logger, bunyan express middleware, pretty print err for development",
   "author": "Ben P.P. Tung",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "mkdirp": "^0.5.1",
     "node-uuid": "^1.4.8",
     "rotatelog-stream": "^1.0.2",
+    "safe-json-stringify": "^1.0.4",
     "through": "^2.3.8",
     "util-superagent-serializer": "^1.0.1"
   }
