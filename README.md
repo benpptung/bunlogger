@@ -1,7 +1,7 @@
 bunlogger
 =========
 
-express logging middlewares built on Bunyan and RotateLog-Stream
+express logging middlewares built on [bunyan](https://www.npmjs.com/package/bunyan) and [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream)
 
 Installation
 =====
@@ -17,9 +17,9 @@ Features
  
 3. `elapsed` show the time spent in this `req`.
 
-4. Use [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream) for rotating logs.
+4. Integrate with [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream) for rotating logs.
 
-5. See what will be logged on the console. 
+5. See logging on the console in developing stage.
 
 Quick Start
 ==========
@@ -65,20 +65,18 @@ log.error('hi error');
 ### Print Error
 
 ```
-const print = require('bunlogger').printErr;
+const printErr = require('bunlogger').printErr;
 
 try {
   new NotExist();
 } catch (er) {
-  print(er)
+  printErr(er)
 }
 
 ```
 
 
 ### cli
-
-make sure bunyan is installed globally
 
 ```
 $ DEBUG=* node bin/www
