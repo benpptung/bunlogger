@@ -1,7 +1,7 @@
 bunlogger
 =========
 
-logging utilities built on Bunyan and RotateLog-Stream
+express logging middlewares built on Bunyan and RotateLog-Stream
 
 Installation
 =====
@@ -11,16 +11,15 @@ $ npm install bunlogger --save
 
 Features
 ========
-1. `app.use(logger.connect())` will populate the `req.log`, which is actually the bunyan logger, simply `req.log.info('...')` will share the same `cor_id` in the `access log` and `error log`.
+1. `app.use(logger.connect())` will populate the `req.log`, which is actually a child of the bunyan logger, simply `req.log.info('...')` will share the same `cor_id` in the `access log` and `error log`.
 
-2. logging `req.log.fatal()`, `req.log.error()`, `req.log.warn()` into error log file. If error is sent to `next(err)` and req.log not got called, middleware `app.use(logger.onError())` will log this error by `error.status` automatically. err.status == 4xx is warn level, err.status == 5xx is error level.
+2. logging `req.log.fatal()`, `req.log.error()`, `req.log.warn()` into error log file. If error is sent to `next(err)` and `req.log[error_level]` not got called, middleware `app.use(logger.onError())` will log this error by `error.status` automatically. err.status == 4xx is warn level, err.status == 5xx is error level.
  
 3. `elapsed` show the time spent in this `req`.
 
 4. Use [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream) for rotating logs.
 
-5. Better error information for debugging.
-
+5. See what will be logged on the console. 
 
 Quick Start
 ==========
@@ -28,17 +27,23 @@ Quick Start
 ### express
 ```
 const express = require('express');
-const Bunlog = require('bunlogger');
+const AppLogger = require('bunlogger');
 
    
 var app = express();
-var logger = new Bunlog();
+app.log = new AppLogger();
+```
 
-// as a middleware
-app.use(logger.connect());
+populate `req.log` and log all accesses
 
-// as an error handler
-app.use(logger.onError());
+```
+app.use(app.log.connect());
+```
+
+Catch express next(err) for logging, but skip if req.log got called above warn level.
+
+```
+app.use(app.log.onError());
 ```
 
 ### Create logger
@@ -76,7 +81,7 @@ try {
 make sure bunyan is installed globally
 
 ```
-$ DEBUG=* node bin/www | bunyan
+$ DEBUG=* node bin/www
 ```
 
 # Options
