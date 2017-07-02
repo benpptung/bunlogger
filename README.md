@@ -17,7 +17,7 @@ Features
  
 3. `elapsed` show the time spent in this `req`.
 
-4. Integrate with [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream) for rotating logs.
+4. Integrate with [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream) for rotating logs to files.
 
 5. See logging on the console in developing stage.
 
@@ -28,10 +28,11 @@ Quick Start
 ```
 const express = require('express');
 const AppLogger = require('bunlogger');
+const logDir = require('path').join(__dirname, 'log');
 
    
 var app = express();
-app.log = new AppLogger();
+app.log = new AppLogger({dev: true, logDir});
 ```
 
 populate `req.log` and log all accesses
@@ -45,6 +46,8 @@ Catch express next(err) for logging, but skip if req.log got called above warn l
 ```
 app.use(app.log.onError());
 ```
+
+`log` directory created and `bunlogger.log`, `bunlogger-error.log` created.
 
 ### Create logger
 
@@ -88,7 +91,7 @@ $ DEBUG=* node bin/www
  - logDir:   'path/to/log/directory'  - directory to save log files
  - keep:     {Number}                 - how many log files keep. See [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream)
  - maxsize:  {Number}                 - max filesize allowed. See [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream)
- - dev:      {Boolean}                - Enable `process.stdout` for development, so we can see how logging file looks like in console.
+ - dev:      {Boolean}                - Pipe logs to `process.stdout` for development, so we can see how logging file looks like in console.
  - streams:  {Array}                  - additional streams for Bunyan
  
 
