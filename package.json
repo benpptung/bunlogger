@@ -1,6 +1,6 @@
 {
   "name": "bunlogger",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "bunyan logger, bunyan express middleware, pretty print err for development",
   "author": "Ben P.P. Tung",
   "license": "MIT",
