@@ -11,15 +11,16 @@ $ npm install bunlogger --save
 
 Features
 ========
-1. `app.use(logger.connect())` will populate the `req.log`, which is actually a child of the bunyan logger, simply `req.log.info('...')` will share the same `cor_id` in the `access log` and `error log`.
+1. `app.use(logger.connect())` will populate the `req.log`, which is actually a child of the bunyan logger, simply `req.log.info('...')` will share the same `cor_id` in the `access log` and `error log`. cor_id is exposed on `req.cor_id`;
 
-2. logging `req.log.fatal()`, `req.log.error()`, `req.log.warn()` into error log file. If error is sent to `next(err)` and `req.log[error_level]` not got called, middleware `app.use(logger.onError())` will log this error by `error.status` automatically. err.status == 4xx is warn level, err.status == 5xx is error level.
+2. logging `req.log.fatal()`, `req.log.error()` into error log file. If error is sent to `next(err)` and `req.log['fatal|error']` not got called, middleware `app.use(logger.onError())` will log this error by `error.status` automatically. err.status == 4xx is warn level, err.status == 5xx is error level.
  
 3. `elapsed` show the time spent in this `req`.
 
 4. Integrate with [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream) for rotating logs to files.
 
 5. See logging on the console in developing stage.
+
 
 Quick Start
 ==========
@@ -49,6 +50,8 @@ app.use(app.log.onError());
 
 `log` directory created and `bunlogger.log`, `bunlogger-error.log` created.
 
+Finally, render `req.cor_id` in the final error handler, so the customer can contact you with `cor_id` for help.
+
 ### Create logger
 
 logger is using [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream) for rotating logs. 
@@ -66,6 +69,8 @@ log.error('hi error');
 ```
 
 ### Print Error
+
+A handy tool to replace console.error(err). 
 
 ```
 const printErr = require('bunlogger').printErr;
