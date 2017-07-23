@@ -11,11 +11,11 @@ $ npm install bunlogger --save
 
 Features
 ========
-1. `app.use(logger.connect())` will populate the `req.log`, which is actually a child of the bunyan logger, simply `req.log.info('...')` will share the same `cor_id` in the `access log` and `error log`. cor_id is exposed on `req.cor_id`;
+1. `app.use(logger.connect())` middleware will populate the `req.log`, which is actually a child of the bunyan logger, simply `req.log.info('...')` will share the same `cor_id` in the `access log` and `error log`.
 
 2. `req.log.fatal()`, `req.log.error()` will log error into `error log` file separated from `access log`.
 
-3. `app.use(logger.onError())` middleware will catch error which was not logged by `req.log.fatal()`, `req.log.error()` or `req.log.warn()`, and treat no status or err.status == 5xx as error level. err.status === 4xx as warning level. 
+3. `app.use(logger.onError())` middleware will skip error which was logged by `req.log.fatal()`, `req.log.error()` or `req.log.warn()`, so no duplicated error logging. In addition, error with no status or status >= 500, will be logged in `error level`. Error with status between 400~499, will be logged in `warn level`.
  
 4. `elapsed` show the time spent in this `req`.
 
