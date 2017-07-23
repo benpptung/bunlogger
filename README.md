@@ -13,13 +13,15 @@ Features
 ========
 1. `app.use(logger.connect())` will populate the `req.log`, which is actually a child of the bunyan logger, simply `req.log.info('...')` will share the same `cor_id` in the `access log` and `error log`. cor_id is exposed on `req.cor_id`;
 
-2. logging `req.log.fatal()`, `req.log.error()` into error log file. If error is sent to `next(err)` and `req.log['fatal|error']` not got called, middleware `app.use(logger.onError())` will log this error by `error.status` automatically. err.status == 4xx is warn level, err.status == 5xx is error level.
+2. `req.log.fatal()`, `req.log.error()` will log error into `error log` file separated from `access log`.
+
+3. `app.use(logger.onError())` middleware will catch error which was not logged by `req.log.fatal()`, `req.log.error()` or `req.log.warn()`, and treat no status or err.status == 5xx as error level. err.status === 4xx as warning level. 
  
-3. `elapsed` show the time spent in this `req`.
+4. `elapsed` show the time spent in this `req`.
 
-4. Integrate with [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream) for rotating logs to files.
+5. Integrate with [rotatelog-stream](https://www.npmjs.com/package/rotatelog-stream) for rotating logs to files.
 
-5. See logging on the console in developing stage.
+6. See logging on the console in developing stage.
 
 
 Quick Start
