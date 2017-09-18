@@ -1,7 +1,7 @@
 {
   "name": "bunlogger",
   "description": "bunyan logger, bunyan express middleware, pretty print err for development",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "author": "Ben P.P. Tung",
   "bugs": {
     "url": "https://github.com/benpptung/bunlogger/issues"
