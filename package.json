@@ -33,6 +33,17 @@
     "url": "https://github.com/benpptung/bunlogger.git"
   },
   "scripts": {
+    "eslint": "TIMING=1 eslint . --ignore-pattern node_modules/",
     "test": "mocha test"
-  }
+  },
+  "devDependencies": {
+    "eslint": "^4.7.0",
+    "eslint-config-less": "github:benpptung/eslint-config-less",
+    "eslint-plugin-node": "^5.1.1"
+  },
+  "eslintIgnore": [
+    "trial/**/*.*",
+    "example/**/*.*",
+    "lib/_bunyan"
+  ]
 }
